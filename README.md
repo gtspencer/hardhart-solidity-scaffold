@@ -1,0 +1,1 @@
+# hardhart-solidity-scaffold

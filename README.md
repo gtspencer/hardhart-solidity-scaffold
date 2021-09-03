@@ -1,6 +1,24 @@
 # hardhart-solidity-scaffold
 
 A setup I created watching [Nader Dabit](https://github.com/dabit3)'s tutorial on full stack eth development.  Will edit as time goes on.
+
+## Usage
+### Deploy
+```
+// Run local
+npx hardhat run scripts/deploy.js --network localhost
+// Run on ropsten
+npx hardhat run scripts/deploy.js --network ropsten
+```
+### Start Hardhat Node
+```
+npx hardhat node
+```
+### Compile
+```
+npx hardhat compile
+```
+
 # Hard Hat ReadMe
 ## Basic Sample Hardhat Project
 

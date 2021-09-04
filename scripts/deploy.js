@@ -13,13 +13,30 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
-  // We get the contract to deploy
-  const Greeter = await hre.ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  // deploy loot
+  // const Loot = await hre.ethers.getContractFactory("Loot");
+  // const loot = await Loot.deploy();
 
-  await greeter.deployed();
+  // await loot.deployed();
 
-  console.log("Greeter deployed to:", greeter.address);
+  // console.log("Loot deployed to:", loot.address);
+
+  // deploy loot components
+  // const LootComp = await hre.ethers.getContractFactory("LootComponents");
+  // const lootcomp = await LootComp.deploy();
+
+  // await lootcomp.deployed();
+
+  // console.log("Loot Component deployed to:", lootcomp.address);
+
+
+  // deploy lootbatles
+  const LootBattles = await hre.ethers.getContractFactory("LootBattles");
+  const lootbattles = await LootBattles.deploy();
+
+  await lootbattles.deployed();
+
+  console.log("LootBattles deployed to:", lootbattles.address)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

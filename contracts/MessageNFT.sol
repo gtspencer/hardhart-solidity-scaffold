@@ -1,8 +1,4 @@
 /**
- *Submitted for verification at Etherscan.io on 2021-09-03
-*/
-
-/**
  *Submitted for verification at Etherscan.io on 2021-08-27
 */
 
@@ -30,10 +26,6 @@ interface IERC165 {
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
-
-
-
-
 
 
 /**
@@ -174,8 +166,6 @@ interface IERC721 is IERC165 {
 }
 
 
-
-
 /**
  * @dev String operations.
  */
@@ -239,9 +229,6 @@ library Strings {
     }
 }
 
-
-
-
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
@@ -261,12 +248,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-
-
-
-
-
 
 
 
@@ -1291,270 +1272,178 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 }
 
-
-contract Dev is ERC721Enumerable, ReentrancyGuard, Ownable {
-
-        string[] private osses = [
-        "Kali Linux",
-        "Ubuntu",
-        "Windows 1.0",
-        "Android Marshmallow",
-        "Windows 95",
-        "FreeBSD",
-        "Slackware Linux",
-        "Chromium OS",
-        "Windows Vista",
-        "Google Chrome OS",
-        "macOS",
-        "DOS",
-        "Linux Mint",
-        "GM-NAA I/O"
-    ];
-    
-    string[] private texteditors = [
-        "VS Code",
-        "Brackets",
-        "VIM",
-        "Emacs",
-        "Brackets",
-        "Atom",
-        "Notepad++",
-        "Pen & Paper",
-        "Visual Studio",
-        "Sand and Stick",
-        "Mental Telepathy",
-        "Bluefish",
-        "Sublime Text",
-        "Dreamweaver",
-        "Coda"
-    ];
-    
-    string[] private clothing = [
-        "Black Hoodie",
-        "White Tanktop",
-        "Patagonia Vest",
-        "Conference T",
-        "Blacked Out",
-        "Bulls Jersey",
-        "Pink Hoodie",
-        "Purple Turtleneck",
-        "Bra",
-        "Navy Suit",
-        "Purple Dress",
-        "Platinum Trenchcoat",
-        "Bubble Gum Wrapper",
-        "Sweat"
-    ];
-    
-    string[] private languages = [
-        "TypeScript",
-        "JavaScript",
-        "Python",
-        "Fortran",
-        "COBOL",
-        "Go",
-        "Rust",
-        "Swift",
-        "PHP",
-        "Haskell",
-        "Scala",
-        "Dart",
-        "Java",
-        "Julia",
-        "C",
-        "Kotlin",
-        "Velato",
-        "ArnoldC",
-        "Shakespeare",
-        "Piet",
-        "Brainfuck",
-        "Chicken",
-        "Legit",
-        "Whitespace"
-    ];
-    
-    string[] private industries = [
-        "Government",
-        "Black Hat",
-        "White Hat",
-        "Nonprofit",
-        "Money Laundering",
-        "Crypto",
-        "FAANG",
-        "AI Startup",
-        "VR",
-        "Traveling Consultant",
-        "Undercover",
-        "Farming",
-        "Environmental",
-        "Hollywood",
-        "Influencer"
-    ];
-    
-    string[] private locations = [
-        "Bucharest",
-        "Hong Kong",
-        "Jackson",
-        "Budapest",
-        "Sao Palo",
-        "Lagos",
-        "Omaha",
-        "Gold Coast",
-        "Paris",
-        "Tokyo",
-        "Shenzhen",
-        "Saint Petersburg",
-        "Buenos Aires",
-        "Kisumu",
-        "Ramallah",
-        "Goa",
-        "London",
-        "Pyongyang"
-    ];
-    
-    string[] private minds = [
-        "Abstract",
-        "Analytical",
-        "Creative",
-        "Concrete",
-        "Critical",
-        "Convergent",
-        "Divergent",
-        "Anarchist"
-    ];
-    
-    string[] private vibes = [
-        "Optimist",
-        "Cosmic",
-        "Chill",
-        "Hyper",
-        "Kind",
-        "Hater",
-        "Phobia",
-        "Generous",
-        "JonGold"
-    ];
-    
-    function random(string memory input) internal pure returns (uint256) {
-        return uint256(keccak256(abi.encodePacked(input)));
-    }
-    
-    function getOS(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "OS", osses);
-    }
-    
-    function getTextEditor(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "TEXTEDITOR", texteditors);
-    }
-    
-    function getClothing(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "CLOTHING", clothing);
-    }
-    
-    function getLanguage(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LANGUAGE", languages);
+/**
+ * @title Counters
+ * @author Matt Condon (@shrugs)
+ * @dev Provides counters that can only be incremented, decremented or reset. This can be used e.g. to track the number
+ * of elements in a mapping, issuing ERC721 ids, or counting request ids.
+ *
+ * Include with `using Counters for Counters.Counter;`
+ */
+library Counters {
+    struct Counter {
+        // This variable should never be directly accessed by users of the library: interactions must be restricted to
+        // the library's function. As of Solidity v0.5.2, this cannot be enforced, though there is a proposal to add
+        // this feature: see https://github.com/ethereum/solidity/issues/4637
+        uint256 _value; // default: 0
     }
 
-    function getIndustry(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "INDUSTRY", industries);
+    function current(Counter storage counter) internal view returns (uint256) {
+        return counter._value;
+    }
+
+    function increment(Counter storage counter) internal {
+        unchecked {
+            counter._value += 1;
+        }
+    }
+
+    function decrement(Counter storage counter) internal {
+        uint256 value = counter._value;
+        require(value > 0, "Counter: decrement overflow");
+        unchecked {
+            counter._value = value - 1;
+        }
+    }
+
+    function reset(Counter storage counter) internal {
+        counter._value = 0;
+    }
+}
+
+
+contract MessageMeNFT is Ownable, ERC721, ERC721Enumerable {
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+
+    string internal constant svgStart = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 400 400" width="800" height="800"><defs><linearGradient id="grad" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="dimgrey"/><stop offset="10%" stop-color="black"/></linearGradient><radialGradient id="grad2" cx="0.5" cy="0.9" r="1.2" fx="0.5" fy="0.9" spreadMethod="repeat"><stop offset="0%" stop-color="red"/><stop offset="100%" stop-color="blue"/></radialGradient></defs><style>.base { fill:yellow;font-family: monospace; font-size: 15px; }</style><rect y="8" width="100%" height="100%" fill="url(#grad)"/><rect y="50%" width="100%" height="100%" fill="url(#grad)"/><text x="20" y="30" class="base">';
+    string internal constant svgEnd = '<rect width="100%" height="100%" fill="none" stroke="dimgrey" stroke-width="20"/><circle cx="20" cy="395" r="3" fill="limegreen"/></svg>';
+    string internal constant desc = '", "description": "LedgerMe is a public ledger for wallet to wallet communications.  Use with care.",';
+    string internal constant jsonstart = 'data:application/json;base64,';
+    string internal constant jsonStub = '], "image": "data:image/svg+xml;base64,';
+
+    struct LedgerData {
+        bool claimed;
+
+        bool isPayable;
+        uint256 writePrice;
+
+        bool writeActive;
+
+        string header;
+        // each person can store 1 message to any other
+        mapping(address => string) messages;
+        // only last 10 messages are cached for tokenURI, but all can be retrieved
+        address[10] lastMessages;
+        // current index of the last 10 messages to write to.  this will be the starting point to count back from when getting our messages
+        uint writeIndex;
     }
     
-    function getLocation(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LOCATION", locations);
+    // Counters.counter private _tokenIds;
+    mapping(address => LedgerData) public allLedgers;
+    // this is used pretty exclusively for tokenuri.  i think its conceptually better to send messages to addresses than to tokenIDs
+    mapping(uint => address) public tokensToAddress;
+
+    constructor() ERC721("MessageMe", "MSG") {}
+
+    // edit functions
+    function writeFree(address userAddress, string calldata message) external {
+        require(!allLedgers[userAddress].isPayable, "token write not free");
+        allLedgers[userAddress].messages[msg.sender] = message;
+        allLedgers[userAddress].lastMessages[allLedgers[userAddress].writeIndex] = msg.sender;
+        allLedgers[userAddress].writeIndex++;
+        // if greater than our array, set back to zero
+        if (allLedgers[userAddress].writeIndex > 9) {
+            allLedgers[userAddress].writeIndex = 0;
+        }
     }
-    
-    function getMind(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MIND", minds);
+
+    function writePayable(address userAddress, string calldata message) external payable {
+        require(msg.value >= allLedgers[userAddress].writePrice, "not enough, chump");
+        allLedgers[userAddress].messages[msg.sender] = message;
+        allLedgers[userAddress].lastMessages[allLedgers[userAddress].writeIndex] = msg.sender;
+        allLedgers[userAddress].writeIndex++;
+        // if greater than our array, set back to zero
+        if (allLedgers[userAddress].writeIndex > 9) {
+            allLedgers[userAddress].writeIndex = 0;
+        }
     }
-    
-    function getVibe(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "VIBE", vibes);
+
+    // owner functions
+    function setWritePrice(uint256 writePrice) external {
+        allLedgers[msg.sender].isPayable = true;
+        allLedgers[msg.sender].writePrice = writePrice;
     }
-    
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal pure returns (string memory) {
-        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
-        string memory output = sourceArray[rand % sourceArray.length];
+
+    function removeWritePrice() external {
+        allLedgers[msg.sender].isPayable = false;
+    }
+
+    function claimToken() external {
+        require(allLedgers[msg.sender].claimed == false, "already claimed");
+        _tokenIds.increment();
+        uint256 tokenId = _tokenIds.current();
+        tokensToAddress[tokenId] = msg.sender;
+        allLedgers[msg.sender].claimed = true;
+        allLedgers[msg.sender].writeActive = true;
+        allLedgers[msg.sender].isPayable = false;
+        allLedgers[msg.sender].header = "its nice to see you";
+        allLedgers[msg.sender].writeIndex = 0;
+    }
+
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {   
+        address[10] memory msgsCopy = allLedgers[tokensToAddress[tokenId]].lastMessages;     
+        string memory output = string(abi.encodePacked(
+            svgStart,
+            allLedgers[tokensToAddress[tokenId]].header,
+            '</text>'
+            ));
+
+        uint textOffset = 0;
+        for (uint i = 0; i < 10; i++) {
+            string memory offset = '50';
+            if (textOffset == 1) {
+                offset = '70';
+            } else if (textOffset == 2) {
+                offset = '90';
+            } else if (textOffset == 3) {
+                offset = '110';
+            } else if (textOffset == 4) {
+                offset = '120';
+            } else if (textOffset == 5) {
+                offset = '150';
+            } else if (textOffset == 6) {
+                offset = '170';
+            } else if (textOffset == 7) {
+                offset = '190';
+            } else if (textOffset == 8) {
+                offset = '210';
+            } else if (textOffset == 9) {
+                offset = '230';
+            }
+            textOffset++;
+            output = string(abi.encodePacked(output, '<text x="20" y="', offset, '" class="base">', allLedgers[tokensToAddress[tokenId]].messages[msgsCopy[i]], '</text>'));
+        }
+        output = string(abi.encodePacked(
+            output,
+            svgEnd));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked(
+            '{"name": "Message #', 
+            Strings.toString(tokenId), 
+            desc, 
+            jsonStub, 
+            Base64.encode(bytes(output)), '"}'))));
+        output = string(abi.encodePacked(jsonstart, json));
         return output;
     }
 
-    function tokenURI(uint256 tokenId) override public view returns (string memory) {
-        string[19] memory parts;
-        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: black; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="white" /><text x="10" y="20" class="base">';
-
-        parts[1] = getOS(tokenId);
-
-        parts[2] = '</text><text x="10" y="40" class="base">';
-
-        parts[3] = getTextEditor(tokenId);
-
-        parts[4] = '</text><text x="10" y="60" class="base">';
-
-        parts[5] = getClothing(tokenId);
-
-        parts[6] = '</text><text x="10" y="80" class="base">';
-
-        parts[7] = getLanguage(tokenId);
-
-        parts[8] = '</text><text x="10" y="100" class="base">';
-
-        parts[9] = getIndustry(tokenId);
-
-        parts[10] = '</text><text x="10" y="120" class="base">';
-
-        parts[11] = getLocation(tokenId);
-
-        parts[14] = '</text><text x="10" y="140" class="base">';
-
-        parts[15] = getMind(tokenId);
-
-        parts[16] = '</text><text x="10" y="160" class="base">';
-
-        parts[17] = getVibe(tokenId);
-
-        parts[18] = '</text></svg>';
-
-        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16], parts[17], parts[18]));
-        
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Dev #', toString(tokenId), '", "description": "Developers around the world are tired of working and contributing their time and effort to enrich the top 1%. Join the movement that is community owned, building the future from the bottom up.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
-        output = string(abi.encodePacked('data:application/json;base64,', json));
-
-        return output;
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override(ERC721, ERC721Enumerable) {
+        ERC721Enumerable._beforeTokenTransfer(from, to, tokenId);
     }
 
-    function claim(uint256 tokenId) public nonReentrant {
-        require(tokenId > 0 && tokenId < 7778, "Token ID invalid");
-        _safeMint(_msgSender(), tokenId);
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC721Enumerable) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
-    
-    function ownerClaim(uint256 tokenId) public nonReentrant onlyOwner {
-        require(tokenId > 7777 && tokenId < 8001, "Token ID invalid");
-        _safeMint(owner(), tokenId);
-    }
-    
-    function toString(uint256 value) internal pure returns (string memory) {
-    // Inspired by OraclizeAPI's implementation - MIT license
-    // https://github.com/oraclize/ethereum-api/blob/b42146b063c7d6ee1358846c198246239e9360e8/oraclizeAPI_0.4.25.sol
-
-        if (value == 0) {
-            return "0";
-        }
-        uint256 temp = value;
-        uint256 digits;
-        while (temp != 0) {
-            digits++;
-            temp /= 10;
-        }
-        bytes memory buffer = new bytes(digits);
-        while (value != 0) {
-            digits -= 1;
-            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
-            value /= 10;
-        }
-        return string(buffer);
-    }
-    
-    constructor() ERC721("Devs for Revolution", "DEVS") Ownable() {}
 }
 
 /// [MIT License]
@@ -1563,24 +1452,17 @@ contract Dev is ERC721Enumerable, ReentrancyGuard, Ownable {
 /// @author Brecht Devos <brecht@loopring.org>
 library Base64 {
     bytes internal constant TABLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
     /// @notice Encodes some bytes to the base64 representation
     function encode(bytes memory data) internal pure returns (string memory) {
         uint256 len = data.length;
         if (len == 0) return "";
-
-        // multiply by 4/3 rounded up
         uint256 encodedLen = 4 * ((len + 2) / 3);
-
-        // Add some extra buffer at the end
         bytes memory result = new bytes(encodedLen + 32);
-
         bytes memory table = TABLE;
 
         assembly {
             let tablePtr := add(table, 1)
             let resultPtr := add(result, 32)
-
             for {
                 let i := 0
             } lt(i, len) {
@@ -1588,7 +1470,6 @@ library Base64 {
             } {
                 i := add(i, 3)
                 let input := and(mload(add(data, i)), 0xffffff)
-
                 let out := mload(add(tablePtr, and(shr(18, input), 0x3F)))
                 out := shl(8, out)
                 out := add(out, and(mload(add(tablePtr, and(shr(12, input), 0x3F))), 0xFF))
@@ -1597,12 +1478,9 @@ library Base64 {
                 out := shl(8, out)
                 out := add(out, and(mload(add(tablePtr, and(input, 0x3F))), 0xFF))
                 out := shl(224, out)
-
                 mstore(resultPtr, out)
-
                 resultPtr := add(resultPtr, 4)
             }
-
             switch mod(len, 3)
             case 1 {
                 mstore(sub(resultPtr, 2), shl(240, 0x3d3d))
@@ -1610,10 +1488,8 @@ library Base64 {
             case 2 {
                 mstore(sub(resultPtr, 1), shl(248, 0x3d))
             }
-
             mstore(result, encodedLen)
         }
-
         return string(result);
     }
 }

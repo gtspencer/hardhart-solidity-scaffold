@@ -9,10 +9,7 @@
     DevDaoComponents.sol
     
     This is a utility contract to make it easier for other
-    contracts to work with Loot properties.
-    
-    Call weaponComponents(), chestComponents(), etc. to get 
-    an array of attributes that correspond to the item. 
+    contracts to work with DevDao properties.
     
     The return format is:
     
@@ -219,11 +216,11 @@ contract DevDaoComponents {
         
         uint256 greatness = rand % 21;
         if (greatness > 14) {
-            components[1] = (rand % suffixes.length) + 1;
+            // components[1] = (rand % suffixes.length) + 1;
         }
         if (greatness >= 19) {
-            components[2] = (rand % namePrefixes.length) + 1;
-            components[3] = (rand % nameSuffixes.length) + 1;
+            // components[2] = (rand % namePrefixes.length) + 1;
+            // components[3] = (rand % nameSuffixes.length) + 1;
             if (greatness == 19) {
                 // ...
             } else {

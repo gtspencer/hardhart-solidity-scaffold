@@ -1,13 +1,4 @@
-/**
- *Submitted for verification at Etherscan.io on 2021-09-03
-*/
-
-/**
- *Submitted for verification at Etherscan.io on 2021-08-27
-*/
-
-// SPDX-License-Identifier: MIT
-
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
 /**
@@ -30,10 +21,6 @@ interface IERC165 {
      */
     function supportsInterface(bytes4 interfaceId) external view returns (bool);
 }
-
-
-
-
 
 
 /**
@@ -174,8 +161,6 @@ interface IERC721 is IERC165 {
 }
 
 
-
-
 /**
  * @dev String operations.
  */
@@ -239,9 +224,6 @@ library Strings {
     }
 }
 
-
-
-
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
@@ -261,12 +243,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-
-
-
-
-
 
 
 
@@ -1291,244 +1267,275 @@ abstract contract ERC721Enumerable is ERC721, IERC721Enumerable {
     }
 }
 
+interface ILoot {
+    function balanceOf(address owner) external view returns (uint256 balance);
+}
 
-contract Dev is ERC721Enumerable, ReentrancyGuard, Ownable {
+// xxxLoot (for Naughty Adventurers)
+contract xxxLoot is ERC721Enumerable, ReentrancyGuard, Ownable {
+    address private lootAddress = 0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7;
+    uint private openSale;
+    ILoot lootContract = ILoot(lootAddress);
+    uint256 public mintingFee = 10000000000000000;
 
-        string[] private osses = [
-        "Kali Linux",
-        "Ubuntu",
-        "Windows 1.0",
-        "Android Marshmallow",
-        "Windows 95",
-        "FreeBSD",
-        "Slackware Linux",
-        "Chromium OS",
-        "Windows Vista",
-        "Google Chrome OS",
-        "macOS",
-        "DOS",
-        "Linux Mint",
-        "GM-NAA I/O"
+    string[] private kinks = [
+        "BDSM",
+        "Food play",
+        "Cosplay",
+        "Pee play",
+        "Necrophilia",
+        "Voyerism",
+        "Virtual sex",
+        "Bondage",
+        "Masochism",
+        "Foot stuff",
+        "Scat Play",
+        "Nebulophilia"
+    ];
+
+    string[] private toys = [
+         "Dildo",
+         "Cock ring",
+         "Swing",
+         "Hand Cuffs",
+         "Vibrator",
+         "Hot wax",
+         "Edible underwear",
+         "Butt plug",
+         "Whip",
+         "Eggplant",
+         "Chastity belt",
+         "Nipple clamps",
+         "Strap on",
+         "Fleshlight"
     ];
     
-    string[] private texteditors = [
-        "VS Code",
-        "Brackets",
-        "VIM",
-        "Emacs",
-        "Brackets",
-        "Atom",
-        "Notepad++",
-        "Pen & Paper",
-        "Visual Studio",
-        "Sand and Stick",
-        "Mental Telepathy",
-        "Bluefish",
-        "Sublime Text",
-        "Dreamweaver",
-        "Coda"
+    string[] private toyPrefixes = [
+        "Wet",
+        "Golden",
+        "Unused",
+        "Dirty",
+        "Dry",
+        "Sparkling",
+        "Lightly used",
+        "Celebrity",
+        "Octopussy"
     ];
-    
-    string[] private clothing = [
-        "Black Hoodie",
-        "White Tanktop",
-        "Patagonia Vest",
-        "Conference T",
-        "Blacked Out",
-        "Bulls Jersey",
-        "Pink Hoodie",
-        "Purple Turtleneck",
-        "Bra",
-        "Navy Suit",
-        "Purple Dress",
-        "Platinum Trenchcoat",
-        "Bubble Gum Wrapper",
-        "Sweat"
+
+    string[] private positions = [
+        "Doggy style",
+        "Missionary",
+        "Oral",
+        "Amazonian",
+        "Solo",
+        "Orgy",
+        "69",
+        "Cowgirl",
+        "Anal",
+        "Lotus",
+        "Upstanding citizen",
+        "Butter churner",
+        "Scissoring"
     ];
-    
-    string[] private languages = [
-        "TypeScript",
-        "JavaScript",
-        "Python",
-        "Fortran",
-        "COBOL",
-        "Go",
-        "Rust",
-        "Swift",
-        "PHP",
-        "Haskell",
-        "Scala",
-        "Dart",
-        "Java",
-        "Julia",
-        "C",
-        "Kotlin",
-        "Velato",
-        "ArnoldC",
-        "Shakespeare",
-        "Piet",
-        "Brainfuck",
-        "Chicken",
-        "Legit",
-        "Whitespace"
+
+    string[] private pornNames = [
+        "Ken Bone",
+        "John Cutesack",
+        "Long Dong Silver",
+        "Jenny Talls",
+        "Ted Mosby",
+        "Rocky Balboner",
+        "Ben Dover",
+        "Teen LaQueefa",
+        "Tommy Salami",
+        "Throbbin Hood",
+        "Fister Mantastic",
+        "Penis P. Penis (the P stands for Penis)"
     ];
-    
-    string[] private industries = [
-        "Government",
-        "Black Hat",
-        "White Hat",
-        "Nonprofit",
-        "Money Laundering",
-        "Crypto",
-        "FAANG",
-        "AI Startup",
-        "VR",
-        "Traveling Consultant",
-        "Undercover",
-        "Farming",
-        "Environmental",
-        "Hollywood",
-        "Influencer"
+
+    string[] private nameSuffixes = [
+        "the Well-Endowned",
+        "the Chaste",
+        "the Plumber",
+        "Sex Architect",
+        "the Pleaser of Many",
+        "the Mothers' Boy",
+        "the Pool Guy"
     ];
-    
+
+    string[] private roles = [
+        "Fluffer",
+        "Playmate",
+        "Camgirl",
+        "Dom",
+        "Sub",
+        "Milf",
+        "Slut",
+        "Top",
+        "Bottom",
+        "Cuckold",
+        "Step Brother"
+    ];
+
     string[] private locations = [
-        "Bucharest",
-        "Hong Kong",
-        "Jackson",
-        "Budapest",
-        "Sao Palo",
-        "Lagos",
-        "Omaha",
-        "Gold Coast",
-        "Paris",
-        "Tokyo",
-        "Shenzhen",
-        "Saint Petersburg",
-        "Buenos Aires",
-        "Kisumu",
-        "Ramallah",
-        "Goa",
-        "London",
-        "Pyongyang"
+        "Red room",
+        "Casting couch",
+        "Red light district",
+        "Back seat of a car",
+        "Fake taxi",
+        "Sex dungeon",
+        "Playboy mansion",
+        "Epstein's island",
+        "Gas station glory hole"
+    ];
+
+    string[] private enhancements = [
+        "Lube",
+        "Plan B",
+        "Condoms",
+        "Horny Goat Weed",
+        "Viagra",
+        "Spermicide",
+        "Douche",
+        "Pineapple Juice"
+    ];
+
+    string[] private traits = [
+        "Hard-to-get",
+        "Plastic",
+        "Promiscuous",
+        "Persistent",
+        "Charismatic",
+        "Fake AF",
+        "Innocent"
+        "Ditsy",
+        "All-natural",
+        "Simp",
+        "Monogamous"
     ];
     
-    string[] private minds = [
-        "Abstract",
-        "Analytical",
-        "Creative",
-        "Concrete",
-        "Critical",
-        "Convergent",
-        "Divergent",
-        "Anarchist"
-    ];
-    
-    string[] private vibes = [
-        "Optimist",
-        "Cosmic",
-        "Chill",
-        "Hyper",
-        "Kind",
-        "Hater",
-        "Phobia",
-        "Generous",
-        "JonGold"
-    ];
     
     function random(string memory input) internal pure returns (uint256) {
         return uint256(keccak256(abi.encodePacked(input)));
     }
-    
-    function getOS(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "OS", osses);
-    }
-    
-    function getTextEditor(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "TEXTEDITOR", texteditors);
-    }
-    
-    function getClothing(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "CLOTHING", clothing);
-    }
-    
-    function getLanguage(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "LANGUAGE", languages);
+
+    function getKink(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "KINK", kinks);
     }
 
-    function getIndustry(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "INDUSTRY", industries);
+    function getToy(uint256 tokenId) public view returns (string memory) {
+        return pluckWithPrefix(tokenId, "TOY", toys, toyPrefixes);
     }
     
+    function getPosition(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "POSITION", positions);
+    }
+
+    function getPornName(uint256 tokenId) public view returns (string memory) {
+        return pluckWithSuffix(tokenId, "NAME", pornNames, nameSuffixes);
+    }
+
+    function getRole(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "ROLE", roles);
+    }
+
     function getLocation(uint256 tokenId) public view returns (string memory) {
         return pluck(tokenId, "LOCATION", locations);
     }
-    
-    function getMind(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "MIND", minds);
+
+    function getEnhancement(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "ENHANCEMENT", enhancements);
+    }
+
+    function getTrait(uint256 tokenId) public view returns (string memory) {
+        return pluck(tokenId, "TRAIT", traits);
     }
     
-    function getVibe(uint256 tokenId) public view returns (string memory) {
-        return pluck(tokenId, "VIBE", vibes);
-    }
-    
-    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal pure returns (string memory) {
+    function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];
         return output;
     }
 
-    function tokenURI(uint256 tokenId) override public view returns (string memory) {
-        string[19] memory parts;
-        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: black; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="white" /><text x="10" y="20" class="base">';
+    function pluckWithSuffix(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, string[] memory suffixArray) internal view returns (string memory) {
+        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
+        string memory output = sourceArray[rand % sourceArray.length];
+        uint256 greatness = rand % 21;
+        if (greatness >= 19) {
+            string memory name = suffixArray[rand % suffixArray.length];
+            output = string(abi.encodePacked(output, ', ', name));
+        }
+        return output;
+    }
 
-        parts[1] = getOS(tokenId);
+    function pluckWithPrefix(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray, string[] memory prefixArray) internal view returns (string memory) {
+        uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
+        string memory output = sourceArray[rand % sourceArray.length];
+        uint256 greatness = rand % 21;
+        if (greatness >= 19) {
+            string memory name = prefixArray[rand % prefixArray.length];
+            output = string(abi.encodePacked(name, ' ', output));
+        }
+        return output;
+    }
+
+    function tokenURI(uint256 tokenId) override public view returns (string memory) {
+        string[17] memory parts;
+        parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350"><style>.base { fill: white; font-family: serif; font-size: 14px; }</style><rect width="100%" height="100%" fill="red" /><text x="10" y="20" class="base">';
+
+        parts[1] = getKink(tokenId);
 
         parts[2] = '</text><text x="10" y="40" class="base">';
 
-        parts[3] = getTextEditor(tokenId);
+        parts[3] = getToy(tokenId);
 
         parts[4] = '</text><text x="10" y="60" class="base">';
 
-        parts[5] = getClothing(tokenId);
+        parts[5] = getPosition(tokenId);
 
         parts[6] = '</text><text x="10" y="80" class="base">';
 
-        parts[7] = getLanguage(tokenId);
+        parts[7] = getPornName(tokenId);
 
         parts[8] = '</text><text x="10" y="100" class="base">';
 
-        parts[9] = getIndustry(tokenId);
+        parts[9] = getRole(tokenId);
 
         parts[10] = '</text><text x="10" y="120" class="base">';
 
         parts[11] = getLocation(tokenId);
 
-        parts[14] = '</text><text x="10" y="140" class="base">';
+        parts[12] = '</text><text x="10" y="140" class="base">';
 
-        parts[15] = getMind(tokenId);
+        parts[13] = getEnhancement(tokenId);
 
-        parts[16] = '</text><text x="10" y="160" class="base">';
+        parts[14] = '</text><text x="10" y="160" class="base">';
 
-        parts[17] = getVibe(tokenId);
+        parts[15] = getTrait(tokenId);
 
-        parts[18] = '</text></svg>';
+        parts[16] = '</text><path d="m331.18546,325.92029c5.54752,-14.17562 27.28291,0 0,18.22579c-27.28291,-18.22579 -5.54752,-32.40141 0,-18.22579z" fill="white"/></svg>';
 
         string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16], parts[17], parts[18]));
+        output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
         
-        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Dev #', toString(tokenId), '", "description": "Developers around the world are tired of working and contributing their time and effort to enrich the top 1%. Join the movement that is community owned, building the future from the bottom up.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Bag #', toString(tokenId), '", "description": "xxxLoot (for Naughty Adventurers) is randomized adult, not intended to offend, gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret. Feel free to use xxxLoot in any way you want.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
         output = string(abi.encodePacked('data:application/json;base64,', json));
 
         return output;
     }
 
-    function claim(uint256 tokenId) public nonReentrant {
-        require(tokenId > 0 && tokenId < 7778, "Token ID invalid");
+    function claim(uint256 tokenId) public payable nonReentrant {
+        require(tokenId > 0 && tokenId < 11801, "Token ID invalid");
+        if (tokenId > 0 && tokenId < 8001 && block.timestamp < openSale) {
+            require(lootContract.balanceOf(msg.sender) > 0, "Minting this token is Loot holders only right now.  Wait until the Looter mint ends");
+        }
+        
+        require(mintingFee <= msg.value, "Not Enough Ether for Mint");
         _safeMint(_msgSender(), tokenId);
     }
     
     function ownerClaim(uint256 tokenId) public nonReentrant onlyOwner {
-        require(tokenId > 7777 && tokenId < 8001, "Token ID invalid");
+        require(tokenId > 11800 && tokenId < 12001, "Token ID invalid");
         _safeMint(owner(), tokenId);
     }
     
@@ -1554,7 +1561,9 @@ contract Dev is ERC721Enumerable, ReentrancyGuard, Ownable {
         return string(buffer);
     }
     
-    constructor() ERC721("Devs for Revolution", "DEVS") Ownable() {}
+    constructor() ERC721("xxxLoot", "xxxLOOT") Ownable() {
+        openSale = block.timestamp + 1 days;
+    }
 }
 
 /// [MIT License]

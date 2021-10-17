@@ -31,12 +31,21 @@ async function main() {
 
 
   // deploy lootbatles
-  const LootBattles = await hre.ethers.getContractFactory("LootBattles");
-  const lootbattles = await LootBattles.deploy();
+  // const LootBattles = await hre.ethers.getContractFactory("LootBattles");
+  // const lootbattles = await LootBattles.deploy();
 
-  await lootbattles.deployed();
+  // await lootbattles.deployed();
 
-  console.log("LootBattles deployed to:", lootbattles.address)
+  // console.log("LootBattles deployed to:", lootbattles.address)
+
+  // deploy xxxLoot
+
+  const msgNFT = await hre.ethers.getContractFactory("MessageMeNFT");
+  const msgNFTDeployer = await msgNFT.deploy();
+
+  await msgNFTDeployer.deployed();
+
+  console.log("msgme deployed to:", msgNFTDeployer.address)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

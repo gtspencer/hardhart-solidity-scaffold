@@ -14,10 +14,20 @@ module.exports = {
   networks: {
     hardhat: {
       chainId: 1337
+    }
+    /** 
+    mainnet: {
+      url: "https://mainnet.infura.io/v3/9e4c4b48907f4beba4ca0f3cc9d50ea2",
+      accounts: ["nada"]
     },
     ropsten: {
       url: "https://ropsten.infura.io/v3/9e4c4b48907f4beba4ca0f3cc9d50ea2",
-      accounts: ["2ce760ef0ef33dee261acf01309467b95d33fc53fe23e2780549110c02f48627"]
+      accounts: ["nada"]
+    },
+    rinkeby: {
+      url: "https://rinkeby.infura.io/v3/9e4c4b48907f4beba4ca0f3cc9d50ea2",
+      accounts: ["nada"]
     }
+    */
   }
 };

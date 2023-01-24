@@ -1,0 +1,12 @@
+{
+    "animation_url": "ipfs://bafybeigbvjyblwb3bhtq3eect4ug3dfb4klrc2a4eerthug5wasbz4c45q/presale.mov",
+    "description": "The Mecole Hardman NFT will give fans exclusive access to Mecole \"The Jet\" Hardman with real world and digital experiences.  This Presale tier gives exclusive early access to Mecole's community.",
+    "name": "Mecole Hardman Presale Pass",
+    "attributes":[
+        {
+            "trait_type" : "Edition",
+            "value" : "Presale"
+        }
+    ],
+    "image": "ipfs://bafybeigbvjyblwb3bhtq3eect4ug3dfb4klrc2a4eerthug5wasbz4c45q/presale.mov"
+}

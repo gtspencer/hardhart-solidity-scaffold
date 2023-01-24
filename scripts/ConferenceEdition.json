@@ -1,0 +1,12 @@
+{
+    "animation_url": "ipfs://bafybeia3rixtxujxy3ii54rmouj5u2stskafwszgbd4v4raodvtui7okb4/conference.gif",
+    "description": "The Mecole Hardman NFT will give fans exclusive access to Mecole \"The Jet\" Hardman with real world and digital experiences.  This Conference tier gives access to all Playoff perks, as well as an autographed jersey.",
+    "name": "Mecole Hardman Conference Pass",
+    "attributes":[
+        {
+            "trait_type" : "Edition",
+            "value" : "Conference"
+        }
+    ],
+    "image": "ipfs://bafybeia3rixtxujxy3ii54rmouj5u2stskafwszgbd4v4raodvtui7okb4/conference.gif"
+}

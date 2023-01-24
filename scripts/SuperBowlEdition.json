@@ -1,0 +1,14 @@
+{
+    "animation_url": "ipfs://bafybeifkitgrlc7d2egl5o6sltxl426n773fdnbuophkddq2plzt6dbm6i/superbowl.gif",
+    "description": "The Mecole Hardman NFT will give fans exclusive access to Mecole \"The Jet\" Hardman with real world and digital experiences.  This Super Bowl tier gives access to all Conference perks, as well as access to box seats at the Broncos vs. Chiefs game, and a private dinner with Mecole after the game",
+    "name": "Mecole Hardman Super Bowl Pass",
+    "attributes":[
+        {
+            "trait_type" : "Edition",
+            "value" : "Super Bowl"
+        }
+    ],
+    "image": "ipfs://bafybeifkitgrlc7d2egl5o6sltxl426n773fdnbuophkddq2plzt6dbm6i/superbowl.gif"
+}
+
+ipfs://bafybeiecj4w2mlq3h4galeykfrgstyazmbjgkbxpixm3vmdi6nwoprkdku/SuperBowlEdition.json

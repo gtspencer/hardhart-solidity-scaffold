@@ -1,0 +1,12 @@
+{
+    "animation_url": "ipfs://bafybeigodtdgnjjs327iu3zbwivoxlvhejvfa2hkqugloc4g6ls6ptzv2u/playoffs.gif",
+    "description": "The Mecole Hardman NFT will give fans exclusive access to Mecole \"The Jet\" Hardman with real world and digital experiences.  This Playoffs tier gives access to all Season perks, as well as access to signed merch and exclusive training and workout content.",
+    "name": "Mecole Hardman Playoffs Pass",
+    "attributes":[
+        {
+            "trait_type" : "Edition",
+            "value" : "Playoffs"
+        }
+    ],
+    "image": "ipfs://bafybeigodtdgnjjs327iu3zbwivoxlvhejvfa2hkqugloc4g6ls6ptzv2u/playoffs.gif"
+}

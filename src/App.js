@@ -6,7 +6,7 @@ import Loot from './artifacts/contracts/Loot.sol/Loot.json';
 import LootBattles from './artifacts/contracts/LootBattles.sol/LootBattles.json';
 import xxxLoot from './artifacts/contracts/xxxLoot.sol/xxxLoot.json';
 import MsgNFT from './artifacts/contracts/MessageNFT.sol/MessageMeNFT.json';
-import vault from './artifacts/contracts/vault.json';
+import testContractabi from './artifacts/contracts/testContract.sol/TestContract.json';
 import './App.css';
 
 const lootAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
@@ -17,6 +17,8 @@ const xxxLootAddress = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"
 const vaultBoxContract = "0xab0b0dD7e4EaB0F9e31a539074a03f1C1Be80879"
 
 const msgAddress = "0x9A676e781A523b5d0C0e43731313A708CB607508";
+
+const testContract = "0xdF7ab1007773c89EB458c933025Bf3610e432027";
 
 function App() {
   
@@ -39,25 +41,6 @@ function App() {
       // const signer = provider.getSigner()
       // const contract = new ethers.Contract(vaultBoxContract, vault.abi, signer)
 
-      for (let i = 0; i < 2501; i++) {
-        getOwner(i)
-      }
-
-      console.log("total unclaimed " + totalUnclaimed)
-    }
-  }
-
-  let totalUnclaimed = 0
-  async function getOwner(id) {
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(vaultBoxContract, vault.abi, provider)
-      const trans = await contract.ownerOf(id)
-    }
-    catch (err) {
-      // means its unclaimed
-      totalUnclaimed++
-      console.log(id)
     }
   }
 
@@ -66,8 +49,8 @@ function App() {
       await requestAccount()
       const provider = new ethers.providers.Web3Provider(window.ethereum)
       const signer = provider.getSigner()
-      const contract = new ethers.Contract(msgAddress, MsgNFT.abi, signer)
-      const transaction = await contract.claimToken()
+      const contract = new ethers.Contract(testContract, testContractabi.abi, signer)
+      const transaction = await contract.mint()
       // await transaction.wait()
       // const data = await contract.tokenURI(1001)
       // console.log('data: ', transaction)

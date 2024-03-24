@@ -40,13 +40,18 @@ async function main() {
   // console.log("LootBattles deployed to:", lootbattles.address)
 
   // deploy xxxLoot
-
-  const msgNFT = await hre.ethers.getContractFactory("NFTimeCapsule");
+try {
+  const msgNFT = await hre.ethers.getContractFactory("BloomSquad");
   const msgNFTDeployer = await msgNFT.deploy();
 
   await msgNFTDeployer.deployed();
 
   console.log("msgme deployed to:", msgNFTDeployer.address)
+} catch (error)
+{
+  console.log(error)
+}
+  
   // console.log(await web3.eth.getStorageAt('0x2Ab87b220843F6C8883db28fCc4F40Aa1e550d92', 0));
 }
 

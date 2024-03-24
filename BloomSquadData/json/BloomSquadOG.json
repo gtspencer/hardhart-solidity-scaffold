@@ -1,0 +1,11 @@
+{
+    "name": "Bloom Squad OG",
+    "description": "Members of the OG Bloom Squad",
+    "image": "ipfs://bafybeiaoa6vfdzuybawfoz4zprfmm4txejqqrgjmojoouhvgepmythcg6e/BloomSquadOG.png",
+    "attributes": [
+        {
+            "trait_type": "Squad",
+            "value": "Bloom"
+        }
+    ]
+}

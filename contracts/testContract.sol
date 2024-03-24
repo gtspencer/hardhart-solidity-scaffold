@@ -12,9 +12,9 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract TestContract is ERC721A, Ownable, ReentrancyGuard {
     using Strings for uint256;
-    string public uri = "https://mannys-game-server.herokuapp.com/api/tokens/";
+    string public uri = "https://nft.retrodoges.com/main/";
 
-    constructor() ERC721A("BM", "Bulk Minter") {
+    constructor() ERC721A("RD", "RetroDoges") {
     }
 
     function mint() external payable nonReentrant {
@@ -34,7 +34,7 @@ contract TestContract is ERC721A, Ownable, ReentrancyGuard {
     {
         require(_exists(tokenId), "Nonexistent token");
 
-        return string(abi.encodePacked(uri, tokenId.toString(), ".json"));
+        return string(abi.encodePacked(uri, tokenId.toString()));
     }
 
     // ------- Overrides --------

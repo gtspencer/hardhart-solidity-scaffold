@@ -1,0 +1,28 @@
+/* AppStyles.css */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 80vw;
+  background-color: white;
+}
+
+.scrollable-window {
+  width: 90%;
+  height: 90%;
+  overflow: auto;
+  color: black;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+  font-size: 10px; /* Adjust font size as needed */
+}

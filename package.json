@@ -4,18 +4,23 @@
   "private": true,
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
+    "@solana/web3.js": "^1.91.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "erc721a": "^4.2.2",
+    "play-sound": "^1.1.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "react-router-dom": "^6.22.3",
+    "react-scripts": "^5.0.1",
+    "solana": "^1.0.7-development",
+    "uniswap": "^0.0.1",
     "web-vitals": "^1.1.2",
-    "web3": "^1.7.5"
+    "web3": "^4.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,7 +48,7 @@
     "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "chai": "^4.3.4",
-    "ethereum-waffle": "^3.4.0",
+    "ethereum-waffle": "^4.0.10",
     "ethers": "^5.4.6",
     "hardhat": "^2.6.2"
   }
